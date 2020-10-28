@@ -1,4 +1,4 @@
-KBEngine1
+KBEngine
 ========
 
 [![Build Status](https://travis-ci.org/kbengine/kbengine.svg)](https://travis-ci.org/kbengine/kbengine)
