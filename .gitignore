@@ -1,5 +1,6 @@
 # ----[ Visual Studio ]------- #
 /kbe/src/_objs
+/kbe/src/.vs
 /kbe/src/ipch
 __pycache__/
 logs/
