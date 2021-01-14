@@ -61,6 +61,14 @@ public:
 	MessageHandlers* pMessageHandlers;
 
 	// stats
+	/*
+		volatile 关键字是一种类型修饰符，用它声明的类型变量表示可以被某些编译器未知的因素更改，
+		比如：操作系统、硬件或者其它线程等。遇到这个关键字声明的变量，编译器对访问该变量的代码就不再进行优化，
+		从而可以提供对特殊地址的稳定访问。
+	*/
+	/*
+		mutable是为了突破const的限制而设置的。被mutable修饰的变量，将永远处于可变的状态，即使在一个const函数中。
+	*/
 	volatile mutable uint32 send_size;
 	volatile mutable uint32 send_count;
 	volatile mutable uint32 recv_size;

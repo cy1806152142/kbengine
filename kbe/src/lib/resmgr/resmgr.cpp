@@ -50,7 +50,7 @@ bool Resmgr::initializeWatcher()
 void Resmgr::autoSetPaths()
 {
 	char path[MAX_BUF];
-	char* ret = getcwd(path, MAX_BUF);
+	char* ret = getcwd(path, MAX_BUF);  //getcwd(path, maxlen)会将当前工作目录的绝对路径复制到参数path所指的内存空间中,参数maxlen为path的空间大小
 	if(ret == NULL)
 		return;
 	
@@ -202,6 +202,19 @@ std::string Resmgr::matchRes(const char* res)
 		strutil::kbe_replace(fpath, "\\", "/");
 		strutil::kbe_replace(fpath, "//", "/");
 
+		/*
+			access(_FileName, _AccessMode)   //检测文件存在及读写权限
+
+			_AccessMode定义如下：
+
+			#define  F_OK      0      Check for file existence 
+
+			#define  X_OK      1      Check for execute permission. 
+
+			#define  W_OK      2      Check for write permission 
+
+			#define  R_OK      4      Check for read permission 
+		*/
 		if (access(fpath.c_str(), 0) == 0)
 		{
 			return fpath;

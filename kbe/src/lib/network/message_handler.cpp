@@ -17,7 +17,7 @@ namespace Network
 Network::MessageHandlers* MessageHandlers::pMainMessageHandlers = 0;
 std::vector<MessageHandlers*>* g_pMessageHandlers;
 
-static Network::FixedMessages* g_fm;
+static Network::FixedMessages* g_fm;  //作用域限制在当前文件
 
 //-------------------------------------------------------------------------------------
 MessageHandlers::MessageHandlers(const std::string& name):
