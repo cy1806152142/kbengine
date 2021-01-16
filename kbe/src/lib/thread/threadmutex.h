@@ -55,12 +55,20 @@ public:
 		THREAD_MUTEX_INIT(mutex_);
 	}
 
+	/*
+		notes: https://www.cnblogs.com/qiu00/p/11914595.html
+		如果使用默认的拷贝构造函数，类中的所有成员变量都会从参数类中拷贝一份，
+		注意：指针成员变量的拷贝仅限于指针变量，而不是指针指向的变量值，换言之，
+		如果一个指针成员变量是通过拷贝构造的，那么该成员指针和参数类中的成员指针
+		指向同一块内存.
+	*/
 	ThreadMutex(const ThreadMutex& v)
 	{
-		// 这里不允许拷贝构造mutex_，这是非常危险的
-		// 会造成多次THREAD_MUTEX_DELETE
+	   // 这里不允许拷贝构造mutex_（mutex_ = v.mutex_;），这是非常危险的, 会造成多次THREAD_MUTEX_DELETE
 		THREAD_MUTEX_INIT(mutex_);
 	}
+
+	ThreadMutex& operator=(const ThreadMutex&) = delete;  //禁用赋值拷贝
 
 	virtual ~ThreadMutex(void)
 	{ 
