@@ -148,8 +148,8 @@ private:
 		void triggerTimer();
 
 	private:
-		TimeStamp			time_;
-		TimeStamp			interval_;
+		TimeStamp			time_;              //触发时间
+		TimeStamp			interval_;          //触发间隔
 
 		Time( const Time & );
 		Time & operator=( const Time & );
@@ -177,6 +177,12 @@ private:
 
 		const value_type & top() const	{ return container_.front(); }
 
+		/*             C++ 堆应用
+			std::make_heap将[start, end)范围进行堆排序，默认使用less, 即最大元素放在第一个;
+			std::pop_heap将front（即第一个最大元素）移动到end的前部，同时将剩下的元素重新构造成(堆排序)一个新的heap;
+			std::push_heap对刚插入的（尾部）元素做堆排序（对于空的vector，可以直接使用vector::push_back + std::push_heap构建堆，而无需使用std::make_heap）;
+
+		*/
 		void push( const value_type & x )
 		{
 			container_.push_back( x );
@@ -186,7 +192,7 @@ private:
 
 		void pop()
 		{
-			std::pop_heap( container_.begin(), container_.end(), Comparator() );
+			std::pop_heap( container_.begin(), container_.end(), Comparator() );  
 			container_.pop_back();
 		}
 

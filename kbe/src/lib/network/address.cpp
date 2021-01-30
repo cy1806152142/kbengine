@@ -84,8 +84,8 @@ Address::~Address()
 //-------------------------------------------------------------------------------------
 int Address::writeToString(char * str, int length) const
 {
-	uint32	hip = ntohl(ip);
-	uint16	hport = ntohs(port);
+	uint32	hip = ntohl(ip);   //网络字节序转换成主机字节序（返回值为uint32)
+	uint16	hport = ntohs(port); //网络字节序转换成主机字节序（返回值为uint16)
 
 	return kbe_snprintf(str, length,
 		"%d.%d.%d.%d:%d",
@@ -107,7 +107,7 @@ char * Address::c_str() const
 //-------------------------------------------------------------------------------------
 const char * Address::ipAsString() const
 {
-	uint32	hip = ntohl(ip);
+	uint32	hip = ntohl(ip);  //网络字节序转换成主机字节序（返回值为uint32)
 	char * buf = Address::nextStringBuf();
 
 	kbe_snprintf(buf, 32, "%d.%d.%d.%d",
@@ -134,14 +134,14 @@ int Address::string2ip(const char * string, u_int32_t & address)
 #if KBE_PLATFORM == PLATFORM_UNIX
 	if (inet_aton(string, (struct in_addr*)&trial) != 0)
 #else
-	if ((trial = inet_addr(string)) != INADDR_NONE)
-#endif
+	if ((trial = inet_addr(string)) != INADDR_NONE)       //inet_addr 将字符串形式的IP地址 -> 网络字节顺序  的整型值
+#endif                                                    //inet_ntoa 网络字节顺序的整型值 ->字符串形式的IP地址
 	{
 		address = trial;
 		return 0;
 	}
 
-	struct hostent * hosts = gethostbyname(string);
+	struct hostent * hosts = gethostbyname(string);  //gethostbyname()返回对应于给定主机名的包含主机名字和地址信息的hostent结构的指针
 	if (hosts != NULL)
 	{
 		address = *(u_int32_t*)(hosts->h_addr_list[0]);

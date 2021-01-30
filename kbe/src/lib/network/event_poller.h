@@ -13,8 +13,6 @@
 namespace KBEngine { 
 namespace Network
 {
-	
-class InputNotificationHandler;
 typedef std::map<int, InputNotificationHandler *> FDReadHandlers;
 typedef std::map<int, OutputNotificationHandler *> FDWriteHandlers;
 

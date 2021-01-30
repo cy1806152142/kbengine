@@ -12,7 +12,6 @@
 namespace KBEngine { 
 namespace Network
 {
-class DispatcherCoupling;
 class ErrorReporter;
 class EventPoller;
 

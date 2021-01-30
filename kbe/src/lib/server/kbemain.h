@@ -151,7 +151,7 @@ int kbeMainT(int argc, char * argv[], COMPONENT_TYPE componentType,
 		return -1;
 
 	setEvns();
-	startLeakDetection(componentType, g_componentID);
+	startLeakDetection(componentType, g_componentID);   // to do
 
 	g_componentType = componentType;
 	DebugHelper::initialize(componentType);
@@ -177,7 +177,7 @@ int kbeMainT(int argc, char * argv[], COMPONENT_TYPE componentType,
 
 	const ChannelCommon& channelCommon = g_kbeSrvConfig.channelCommon();
 
-	Network::g_SOMAXCONN = g_kbeSrvConfig.tcp_SOMAXCONN(g_componentType);
+	Network::g_SOMAXCONN = g_kbeSrvConfig.tcp_SOMAXCONN(g_componentType);  //定义socket监听队列长度  https://blog.csdn.net/aitangyong/article/details/49661907
 
 	Network::NetworkInterface networkInterface(&dispatcher, 
 		extlisteningTcpPort_min, extlisteningTcpPort_max, extlisteningUdpPort_min, extlisteningUdpPort_max, extlisteningInterface,

@@ -79,7 +79,7 @@ bool TCPPacketReceiver::processRecv(bool expectingPacket)
 	}
 
 	TCPPacket* pReceiveWindow = TCPPacket::createPoolObject(OBJECTPOOL_POINT);
-	int len = pReceiveWindow->recvFromEndPoint(*pEndpoint_);
+	int len = pReceiveWindow->recvFromEndPoint(*pEndpoint_);   //默认 socket 是阻塞的 但阻塞与非阻塞recv返回值没有区分，都是 <0 出错， =0 连接关闭， >0 接收到数据大小
 
 	if (len < 0)
 	{
